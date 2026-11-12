@@ -15,6 +15,7 @@
     if (path.endsWith("contact.html")) return "contact";
     if (path.endsWith("login.html")) return "login";
     if (path.endsWith("register.html")) return "register";
+    if (path.endsWith("dashboard.html")) return "dashboard";
     if (path.endsWith("404.html")) return "404";
     return "home";
   }
@@ -888,9 +889,28 @@
       // Check if redirected from Registration
       const params = new URLSearchParams(window.location.search);
       if (params.get("registered") === "true") {
-        const regUser = sessionStorage.getItem("stacklyRegisteredUsername");
-        const regEmail = sessionStorage.getItem("stacklyRegisteredEmail");
-        const regRole = sessionStorage.getItem("stacklyRegisteredRole");
+        let regUser = params.get("user") || "";
+        let regEmail = params.get("email") || "";
+        let regRole = params.get("role") || "";
+        try {
+          if (!regUser)
+            regUser =
+              sessionStorage.getItem("stacklyRegisteredUsername") ||
+              localStorage.getItem("stacklyRegisteredUsername") ||
+              "";
+          if (!regEmail)
+            regEmail =
+              sessionStorage.getItem("stacklyRegisteredEmail") ||
+              localStorage.getItem("stacklyRegisteredEmail") ||
+              "";
+          if (!regRole)
+            regRole =
+              sessionStorage.getItem("stacklyRegisteredRole") ||
+              localStorage.getItem("stacklyRegisteredRole") ||
+              "";
+        } catch (err) {
+          // Ignore storage restrictions
+        }
 
         if (regEmail && loginEmail) loginEmail.value = regEmail;
         if (regRole && loginRole) loginRole.value = regRole;
@@ -1074,24 +1094,74 @@
           return;
         }
 
+        // Save submitted login credentials & role data for Dashboard display
+        const nowStr = new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+        const pwdLength = String((loginPassword.value || "").length || 10);
+        let storedUser = "";
+        try {
+          storedUser =
+            sessionStorage.getItem("stacklyRegisteredUsername") ||
+            localStorage.getItem("stacklyRegisteredUsername") ||
+            "";
+          sessionStorage.setItem("stacklyLoginRole", loginRole.value);
+          sessionStorage.setItem("stacklyLoginEmail", emailVal);
+          sessionStorage.setItem(
+            "stacklyLoginRemember",
+            loginRemember.checked ? "true" : "false",
+          );
+          sessionStorage.setItem("stacklyLoginPasswordLen", pwdLength);
+          sessionStorage.setItem("stacklyLoginTime", nowStr);
+          if (storedUser) {
+            sessionStorage.setItem("stacklyLoginUsername", storedUser);
+          }
+
+          localStorage.setItem("stacklyLoginRole", loginRole.value);
+          localStorage.setItem("stacklyLoginEmail", emailVal);
+          localStorage.setItem(
+            "stacklyLoginRemember",
+            loginRemember.checked ? "true" : "false",
+          );
+          localStorage.setItem("stacklyLoginPasswordLen", pwdLength);
+          localStorage.setItem("stacklyLoginTime", nowStr);
+          if (storedUser) {
+            localStorage.setItem("stacklyLoginUsername", storedUser);
+          }
+        } catch (err) {
+          // Ignore storage errors in private browsing
+        }
+
         showAuthAlert(
           "loginAlertBox",
           "Authenticated as " +
             loginRole.value +
-            "! Redirecting to Stackly Showroom Home...",
+            "! Redirecting to your Role Dashboard...",
           "success",
         );
         showToast(
-          "Welcome back! Signed in as " +
+          "Welcome! Signed in as " +
             loginRole.value +
             " (" +
             emailVal +
-            ").",
+            "). Opening Dashboard...",
         );
 
+        const dashUrl =
+          "dashboard.html?role=" +
+          encodeURIComponent(loginRole.value) +
+          "&email=" +
+          encodeURIComponent(emailVal) +
+          "&remember=" +
+          (loginRemember.checked ? "true" : "false") +
+          "&pwdlen=" +
+          encodeURIComponent(pwdLength) +
+          (storedUser ? "&user=" + encodeURIComponent(storedUser) : "");
+
         setTimeout(function () {
-          window.location.href = "../index.html";
-        }, 1200);
+          window.location.href = dashUrl;
+        }, 900);
       });
     }
 
@@ -1348,11 +1418,14 @@
           return;
         }
 
-        // Save registered user details for seamless pre-fill on login page
+        // Save registered user details for seamless pre-fill on login page & dashboard
         try {
           sessionStorage.setItem("stacklyRegisteredUsername", cleanUser);
           sessionStorage.setItem("stacklyRegisteredEmail", emailVal);
           sessionStorage.setItem("stacklyRegisteredRole", regRole.value);
+          localStorage.setItem("stacklyRegisteredUsername", cleanUser);
+          localStorage.setItem("stacklyRegisteredEmail", emailVal);
+          localStorage.setItem("stacklyRegisteredRole", regRole.value);
         } catch (err) {
           // Ignore storage errors in private browsing
         }
@@ -1367,8 +1440,15 @@
         );
 
         // Requirement 8: Redirect to login page after register submit
+        const loginUrl =
+          "login.html?registered=true&role=" +
+          encodeURIComponent(regRole.value) +
+          "&email=" +
+          encodeURIComponent(emailVal) +
+          "&user=" +
+          encodeURIComponent(cleanUser);
         setTimeout(function () {
-          window.location.href = "login.html?registered=true";
+          window.location.href = loginUrl;
         }, 1000);
       });
     }

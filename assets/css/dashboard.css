@@ -1,0 +1,1118 @@
+.dashboard-body {
+  background-color: #101010;
+  color: var(--white);
+  font-family: "Roboto", sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Subtle Carbon-Fiber Racing Grid Background */
+.dashboard-body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(
+      circle at 12% 15%,
+      rgba(var(--main-color-rgb), 0.14) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 88% 85%,
+      rgba(var(--main-color-rgb), 0.1) 0%,
+      transparent 45%
+    ),
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    100% 100%,
+    36px 36px,
+    36px 36px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ==========================================================================
+   1. Overall Layout Shell (Sidebar + Main Area)
+   ========================================================================== */
+.dashboard-layout {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* ==========================================================================
+   2. Role-Based Sidebar Navigation
+   ========================================================================== */
+.dashboard-sidebar {
+  width: 295px;
+  flex-shrink: 0;
+  background: linear-gradient(180deg, #181818 0%, #121212 100%);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1040;
+  transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 10px 0 36px rgba(0, 0, 0, 0.5);
+}
+
+/* Brand Header inside Sidebar */
+.sidebar-brand-box {
+  padding: 22px 24px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.sidebar-brand-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.sidebar-brand-link img {
+  max-height: 40px;
+  width: auto;
+}
+
+.sidebar-close-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: var(--white);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-base);
+}
+
+.sidebar-close-btn:hover {
+  background: var(--main-color);
+  border-color: var(--main-color);
+}
+
+/* Active Role Identity Card in Sidebar */
+.sidebar-role-card {
+  margin: 18px 18px 10px;
+  padding: 16px;
+  border-radius: 14px;
+  background: linear-gradient(
+    145deg,
+    rgba(227, 20, 35, 0.18) 0%,
+    rgba(41, 41, 41, 0.65) 100%
+  );
+  border: 1px solid rgba(227, 20, 35, 0.38);
+  border-left: 4px solid var(--main-color);
+}
+
+.sidebar-role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--white);
+  background: var(--main-color);
+  padding: 4px 10px;
+  border-radius: 30px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 14px rgba(var(--main-color-rgb), 0.35);
+}
+
+.sidebar-user-name {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 3px;
+  word-break: break-word;
+}
+
+.sidebar-user-email {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.74);
+  margin-bottom: 8px;
+  word-break: break-all;
+}
+
+.sidebar-session-meta {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11.5px;
+  color: #4ade80;
+  font-weight: 600;
+}
+
+.sidebar-session-meta .pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2);
+}
+
+/* Sidebar Menu List */
+.sidebar-menu-wrap {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 16px 18px;
+}
+
+.sidebar-menu-wrap::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sidebar-menu-wrap::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+.sidebar-menu-label {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.45);
+  padding: 8px 10px 10px;
+}
+
+.dash-sidebar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.dash-sidebar-item {
+  width: 100%;
+}
+
+.dash-sidebar-link {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 15px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: var(--transition-base);
+  text-decoration: none;
+}
+
+.dash-sidebar-link-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dash-sidebar-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--main-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+  transition: var(--transition-base);
+}
+
+.dash-sidebar-tag {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.72);
+  flex-shrink: 0;
+}
+
+.dash-sidebar-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(227, 20, 35, 0.45);
+  color: var(--white);
+  transform: translateX(3px);
+}
+
+.dash-sidebar-link.active {
+  background: linear-gradient(135deg, var(--main-color) 0%, #b50e1b 100%);
+  border-color: var(--main-color);
+  color: var(--white);
+  box-shadow: 0 10px 24px rgba(var(--main-color-rgb), 0.35);
+}
+
+.dash-sidebar-link.active .dash-sidebar-icon {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--white);
+}
+
+.dash-sidebar-link.active .dash-sidebar-tag {
+  background: rgba(0, 0, 0, 0.28);
+  color: var(--white);
+}
+
+/* Sidebar Bottom Footer & Logout Button */
+.sidebar-footer-box {
+  padding: 16px 18px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.sidebar-showroom-loc {
+  font-size: 11.5px;
+  color: rgba(255, 255, 255, 0.58);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dash-logout-btn {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  background: rgba(227, 20, 35, 0.14);
+  border: 1.5px solid rgba(227, 20, 35, 0.5);
+  color: var(--white) !important;
+  font-size: 13.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  cursor: pointer;
+  transition: var(--transition-base);
+  text-decoration: none;
+}
+
+.dash-logout-btn i {
+  color: var(--main-color);
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.dash-logout-btn:hover {
+  background: var(--main-color);
+  border-color: var(--main-color);
+  color: var(--white) !important;
+  box-shadow: 0 8px 22px rgba(var(--main-color-rgb), 0.38);
+  transform: translateY(-2px);
+}
+
+.dash-logout-btn:hover i {
+  color: var(--white);
+  transform: translateX(3px);
+}
+
+/* Mobile Sidebar Backdrop */
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(4px);
+  z-index: 1035;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.sidebar-backdrop.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ==========================================================================
+   3. Main Content Wrapper & Top Header Bar
+   ========================================================================== */
+.dashboard-main {
+  flex: 1;
+  margin-left: 295px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Sticky Top Telemetry Bar */
+.dashboard-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+  background: rgba(22, 22, 22, 0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 15px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.mobile-sidebar-toggle {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: var(--white);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  transition: var(--transition-base);
+}
+
+.mobile-sidebar-toggle:hover {
+  background: var(--main-color);
+  border-color: var(--main-color);
+}
+
+.topbar-title-group h1 {
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 900;
+  color: var(--white);
+  margin-bottom: 2px;
+  line-height: 1.2;
+}
+
+.topbar-subtitle {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.68);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.topbar-telemetry-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.topbar-telemetry-pill i {
+  color: var(--main-color);
+}
+
+.topbar-logout-pill {
+  width: auto;
+  padding: 9px 18px;
+  font-size: 12.5px;
+}
+
+/* ==========================================================================
+   4. Dashboard Content Container & Submitted Login Data Banner
+   ========================================================================== */
+.dashboard-content-area {
+  padding: 28px;
+  flex: 1;
+}
+
+/* Submitted Login Credentials & Active Role Banner (Requirement 2 & 3) */
+.login-session-vault-card {
+  background: linear-gradient(
+    135deg,
+    rgba(34, 34, 34, 0.96) 0%,
+    rgba(24, 24, 24, 0.98) 65%,
+    rgba(227, 20, 35, 0.18) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 4px solid var(--main-color);
+  border-radius: 18px;
+  padding: 24px 26px;
+  margin-bottom: 28px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+}
+
+.session-vault-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.session-vault-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.session-vault-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: rgba(var(--main-color-rgb), 0.2);
+  border: 1px solid rgba(var(--main-color-rgb), 0.45);
+  color: var(--main-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.session-vault-kicker {
+  font-size: 11.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  color: var(--main-color);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.session-vault-heading {
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--white);
+  margin: 0;
+}
+
+.session-data-item {
+  background: rgba(0, 0, 0, 0.32);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-left: 3px solid var(--main-color);
+  border-radius: 12px;
+  padding: 13px 16px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.session-data-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.9px;
+  color: rgba(255, 255, 255, 0.58);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.session-data-label i {
+  color: var(--main-color);
+}
+
+.session-data-value {
+  font-size: 14.5px;
+  font-weight: 800;
+  color: var(--white);
+  word-break: break-word;
+  margin: 0;
+}
+
+/* ==========================================================================
+   5. Section Header & Equal-Aligned KPI Cards (Requirement 8)
+   ========================================================================== */
+.dash-section-banner {
+  background: var(--color-two);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 22px 24px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.dash-section-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  color: var(--main-color);
+  margin-bottom: 6px;
+}
+
+.dash-section-title {
+  font-size: clamp(20px, 2.2vw, 26px);
+  font-weight: 900;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.dash-section-desc {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.74);
+  margin: 0;
+  max-width: 760px;
+}
+
+.dash-section-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Equal Height KPI Stat Cards */
+.dash-kpi-card {
+  background: var(--color-two);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 3px solid var(--main-color);
+  border-radius: 16px;
+  padding: 22px 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: var(--transition-base);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.dash-kpi-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(227, 20, 35, 0.5);
+  box-shadow: 0 18px 38px rgba(227, 20, 35, 0.16);
+}
+
+.dash-kpi-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.dash-kpi-label {
+  font-size: 12.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dash-kpi-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 11px;
+  background: rgba(var(--main-color-rgb), 0.16);
+  color: var(--main-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.dash-kpi-value {
+  font-size: clamp(22px, 2.2vw, 28px);
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+
+.dash-kpi-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.kpi-trend-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 700;
+  font-size: 11.5px;
+  padding: 3px 9px;
+  border-radius: 20px;
+}
+
+.kpi-trend-up {
+  background: rgba(34, 197, 94, 0.18);
+  color: #4ade80;
+}
+
+.kpi-trend-hot {
+  background: rgba(227, 20, 35, 0.22);
+  color: #ff6b76;
+}
+
+.kpi-trend-warn {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+}
+
+/* ==========================================================================
+   6. Responsive Bootstrap Tables in Dashboard (Requirement 6)
+   ========================================================================== */
+.dash-table-card {
+  background: var(--color-two);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 28px;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.35);
+}
+
+.dash-table-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.dash-table-title {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--white);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dash-table-title i {
+  color: var(--main-color);
+}
+
+.dashboard-table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dash-table {
+  width: 100%;
+  margin-bottom: 0;
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.08);
+  vertical-align: middle;
+}
+
+.dash-table > :not(caption) > * > * {
+  background-color: transparent !important;
+  color: var(--white);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  padding: 15px 18px;
+  font-size: 13.5px;
+  white-space: nowrap;
+}
+
+.dash-table thead th {
+  background: rgba(0, 0, 0, 0.35) !important;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 11.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.9px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.dash-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.dash-table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+/* Status Pills in Tables */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: 30px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.status-pill.pill-success {
+  background: rgba(34, 197, 94, 0.18);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  color: #4ade80;
+}
+
+.status-pill.pill-primary {
+  background: rgba(227, 20, 35, 0.2);
+  border: 1px solid rgba(227, 20, 35, 0.45);
+  color: #ff7a84;
+}
+
+.status-pill.pill-warning {
+  background: rgba(245, 158, 11, 0.18);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #fbbf24;
+}
+
+.status-pill.pill-info {
+  background: rgba(56, 189, 248, 0.16);
+  border: 1px solid rgba(56, 189, 248, 0.38);
+  color: #7dd3fc;
+}
+
+/* Action Buttons inside Tables & Cards */
+.dash-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 8px 15px;
+  border-radius: 8px;
+  background: rgba(227, 20, 35, 0.16);
+  border: 1px solid rgba(227, 20, 35, 0.45);
+  color: var(--white) !important;
+  font-size: 12.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: var(--transition-base);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.dash-action-btn i {
+  color: var(--main-color);
+  transition: color 0.25s ease;
+}
+
+.dash-action-btn:hover {
+  background: var(--main-color);
+  border-color: var(--main-color);
+  color: var(--white) !important;
+  box-shadow: 0 6px 18px rgba(var(--main-color-rgb), 0.35);
+  transform: translateY(-1px);
+}
+
+.dash-action-btn:hover i {
+  color: var(--white);
+}
+
+.dash-action-btn.btn-solid-red {
+  background: var(--main-color);
+  border-color: var(--main-color);
+  box-shadow: 0 6px 18px rgba(var(--main-color-rgb), 0.3);
+}
+
+.dash-action-btn.btn-solid-red i {
+  color: var(--white);
+}
+
+.dash-action-btn.btn-solid-red:hover {
+  background: #b80d1a;
+  border-color: #b80d1a;
+}
+
+/* ==========================================================================
+   7. Equal-Height Content & Telemetry Cards (Requirement 8)
+   ========================================================================== */
+.dash-equal-card {
+  background: var(--color-two);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 3px solid var(--main-color);
+  border-radius: 16px;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: var(--transition-base);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.32);
+}
+
+.dash-equal-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(227, 20, 35, 0.5);
+  box-shadow: 0 18px 40px rgba(227, 20, 35, 0.16);
+}
+
+.dash-card-thumb {
+  position: relative;
+  height: 185px;
+  overflow: hidden;
+  background: #141414;
+}
+
+.dash-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.dash-equal-card:hover .dash-card-thumb img {
+  transform: scale(1.05);
+}
+
+.dash-card-thumb-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--main-color);
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 4px 11px;
+  border-radius: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+}
+
+.dash-card-body {
+  padding: 22px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.dash-card-top {
+  margin-bottom: 16px;
+}
+
+.dash-card-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--main-color);
+  margin-bottom: 8px;
+}
+
+.dash-card-title {
+  font-size: 17.5px;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.dash-card-text {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+/* Telemetry Progress / Spec List inside Cards */
+.dash-spec-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.dash-spec-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 12.5px;
+  padding-bottom: 7px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.dash-spec-list li span:first-child {
+  color: rgba(255, 255, 255, 0.65);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dash-spec-list li span:first-child i {
+  color: var(--main-color);
+}
+
+.dash-spec-list li strong {
+  color: var(--white);
+  font-weight: 700;
+}
+
+.dash-progress-group {
+  margin-bottom: 16px;
+}
+
+.dash-progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.82);
+  margin-bottom: 6px;
+}
+
+.dash-progress-bar {
+  height: 7px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.dash-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--main-color), #ff5c67);
+  border-radius: 10px;
+}
+
+.dash-card-footer {
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: auto;
+}
+
+/* Dashboard Footer */
+.dashboard-footer {
+  padding: 18px 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(18, 18, 18, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.dashboard-footer a {
+  color: var(--main-color);
+  font-weight: 700;
+}
+
+.dashboard-footer a:hover {
+  color: var(--white);
+}
+
+/* ==========================================================================
+   8. Mobile & Tablet Responsive Breakpoints (Requirement 6)
+   ========================================================================== */
+@media (max-width: 991.98px) {
+  .dashboard-sidebar {
+    transform: translateX(-100%);
+  }
+
+  .dashboard-sidebar.sidebar-open {
+    transform: translateX(0);
+  }
+
+  .sidebar-close-btn {
+    display: inline-flex;
+  }
+
+  .dashboard-main {
+    margin-left: 0;
+  }
+
+  .mobile-sidebar-toggle {
+    display: inline-flex;
+  }
+
+  .dashboard-topbar {
+    padding: 14px 18px;
+  }
+
+  .dashboard-content-area {
+    padding: 20px 16px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .login-session-vault-card {
+    padding: 18px 16px;
+  }
+
+  .dash-section-banner {
+    padding: 18px 16px;
+  }
+
+  .dash-table-header {
+    padding: 16px;
+  }
+
+  .dash-card-body {
+    padding: 18px 16px;
+  }
+
+  .dashboard-footer {
+    padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
