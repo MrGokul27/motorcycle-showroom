@@ -1374,6 +1374,188 @@
     }
   }
 
+  /* ==========================================================================
+	   Scroll Reveal Animations for Home Page & All Sub-Pages (All Sections)
+	   ========================================================================== */
+  function initScrollRevealAnimations() {
+    function markReveal(el, direction, delaySec) {
+      if (!el || el.classList.contains("reveal-on-scroll")) return;
+      el.classList.add("reveal-on-scroll");
+      const dir = el.getAttribute("data-reveal") || direction || "up";
+      el.classList.add("reveal-" + dir);
+      if (!el.getAttribute("data-reveal")) {
+        el.setAttribute("data-reveal", dir);
+      }
+      if (typeof delaySec === "number" && delaySec > 0) {
+        el.style.setProperty("--reveal-delay", delaySec.toFixed(2) + "s");
+      }
+    }
+
+    // 1. Honor any explicit [data-reveal] attributes already in HTML
+    document.querySelectorAll("[data-reveal]").forEach(function (el) {
+      const dir = el.getAttribute("data-reveal") || "up";
+      const customDelay = el.getAttribute("data-reveal-delay");
+      markReveal(el, dir, customDelay ? parseFloat(customDelay) : undefined);
+    });
+
+    // 2. Configure every <section> across Home & all Sub-Pages
+    const allSections = document.querySelectorAll("section");
+    allSections.forEach(function (section) {
+      section.setAttribute("data-scroll-section", "true");
+
+      // A. Hero Showroom Slider (.slider-one)
+      if (section.classList.contains("slider-one")) {
+        const activeSlide =
+          section.querySelector(".hero-slide-item.active") ||
+          section.querySelector(".hero-slide-item");
+        if (activeSlide) {
+          const title = activeSlide.querySelector(".slider-one_title");
+          const heading = activeSlide.querySelector(".slider-one_heading");
+          const text = activeSlide.querySelector(".slider-one_text");
+          const buttons = activeSlide.querySelector(".slider-one_button");
+          const events = activeSlide.querySelector(".slider-one_events");
+          const imgCol = activeSlide.querySelector(".slider-one_image-column");
+          markReveal(title, "down", 0.05);
+          markReveal(heading, "left", 0.14);
+          markReveal(text, "left", 0.22);
+          markReveal(buttons, "up", 0.3);
+          markReveal(events, "up", 0.38);
+          markReveal(imgCol, "right", 0.18);
+        }
+        const controls = section.querySelector(".hero-slider-controls");
+        markReveal(controls, "up", 0.42);
+        return;
+      }
+
+      // B. Inner Page Banner (.page-banner)
+      if (section.classList.contains("page-banner")) {
+        const breadcrumb = section.querySelector(".breadcrumb-nav");
+        const title = section.querySelector(".page-banner_title");
+        const desc = section.querySelector(".page-banner_desc");
+        markReveal(breadcrumb, "down", 0.05);
+        markReveal(title, "up", 0.14);
+        markReveal(desc, "up", 0.24);
+        return;
+      }
+
+      // C. Auth Pages (.auth-section) & 404 Page (.error-404-section)
+      if (
+        section.classList.contains("auth-section") ||
+        section.classList.contains("error-404-section")
+      ) {
+        const topBar = section.querySelector(".auth-top-bar, .error-top-bar");
+        const mainCard = section.querySelector(".auth-card, .error-vault-card");
+        const leftStage = section.querySelector(
+          ".auth-showcase, .error-visual-stage",
+        );
+        const rightPanel = section.querySelector(
+          ".auth-form-panel, .error-command-panel",
+        );
+        markReveal(topBar, "down", 0.05);
+        markReveal(mainCard, "zoom", 0.12);
+        markReveal(leftStage, "left", 0.2);
+        markReveal(rightPanel, "right", 0.26);
+        return;
+      }
+
+      // D. Section Titles (.sec-title)
+      section.querySelectorAll(".sec-title").forEach(function (secTitle) {
+        markReveal(secTitle, "up", 0.05);
+      });
+
+      // E. Featured Spotlight Containers
+      section
+        .querySelectorAll(
+          ".featured-event-card, .featured-article-box, .finance-box, .vlog-block_one-image, .newsletter-one .inner-container",
+        )
+        .forEach(function (box) {
+          markReveal(box, "zoom", 0.12);
+        });
+
+      // F. Rows & Columns Inside Each Section
+      const rows = section.querySelectorAll(".row");
+      rows.forEach(function (row) {
+        // Skip rows inside forms so form inputs aren't individually delayed
+        if (row.closest("form")) return;
+
+        const directCols = Array.from(row.children).filter(function (child) {
+          return (
+            child.classList &&
+            Array.from(child.classList).some(function (cls) {
+              return cls.startsWith("col-") || cls === "column";
+            })
+          );
+        });
+
+        if (directCols.length === 2) {
+          // 2-Column Split Layout: Left & Right Directional Reveal
+          markReveal(directCols[0], "left", 0.1);
+          markReveal(directCols[1], "right", 0.2);
+        } else if (directCols.length > 2) {
+          // Multi-Column Grid (3, 4, or 6 cards): Staggered Upward / Zoom Reveal
+          const perRow = directCols.length >= 4 ? 4 : 3;
+          directCols.forEach(function (col, idx) {
+            const staggerDelay = 0.08 + (idx % perRow) * 0.1;
+            const hasZoomCard = col.querySelector(
+              ".category-card, .milestone-card, .pass-tier-card",
+            );
+            markReveal(col, hasZoomCard ? "zoom" : "up", staggerDelay);
+          });
+        }
+      });
+
+      // G. Stacked Timeline Nodes, Schedule Cards & Accordion Blocks
+      section
+        .querySelectorAll(
+          ".schedule-row-card, .timeline-node, .accordion-box .block, .tech-feature-box",
+        )
+        .forEach(function (item, idx) {
+          markReveal(item, "up", 0.08 + (idx % 5) * 0.08);
+        });
+    });
+
+    // 3. Common Footer Component (#mainFooter)
+    const footer = document.getElementById("mainFooter");
+    if (footer) {
+      footer.querySelectorAll(".footer_column").forEach(function (col, idx) {
+        markReveal(col, "up", 0.08 + idx * 0.1);
+      });
+      const footerBottom = footer.querySelector(".footer-bottom");
+      markReveal(footerBottom, "fade", 0.25);
+    }
+
+    // 4. Observe all .reveal-on-scroll elements with IntersectionObserver
+    const revealTargets = document.querySelectorAll(".reveal-on-scroll");
+    if (!revealTargets.length) return;
+
+    if (!("IntersectionObserver" in window)) {
+      revealTargets.forEach(function (el) {
+        el.classList.add("is-revealed");
+      });
+      return;
+    }
+
+    const revealObserver = new IntersectionObserver(
+      function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-revealed");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: "0px 0px -45px 0px",
+        threshold: 0.12,
+      },
+    );
+
+    revealTargets.forEach(function (el) {
+      revealObserver.observe(el);
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", async function () {
     await Promise.all([
       loadComponent(
@@ -1396,5 +1578,6 @@
     initFinanceCalculator();
     initActionToastTriggers();
     initEmptyLinksRedirectAnd404Controls();
+    initScrollRevealAnimations();
   });
 })();
