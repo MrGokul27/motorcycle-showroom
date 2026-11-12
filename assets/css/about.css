@@ -1,0 +1,256 @@
+.about-banner-bg {
+  background-image: url("../images/about/banner-bg.webp");
+}
+
+/* Section 2: Heritage & Vision */
+.about-heritage-sec {
+  padding: 95px 0;
+  background: var(--white);
+}
+
+.heritage-img-box {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.heritage-img-box img {
+  width: 100%;
+  height: 490px;
+  object-fit: cover;
+}
+
+.heritage-floating-card {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  background: rgba(var(--color-two-rgb), 0.94);
+  color: var(--white);
+  padding: 20px 26px;
+  border-radius: 12px;
+  border-left: 4px solid var(--main-color);
+  max-width: 300px;
+}
+
+.vision-pillar-item {
+  background: var(--color-three);
+  border-radius: 10px;
+  padding: 18px 20px;
+  border-left: 4px solid var(--main-color);
+  height: 100%;
+  transition: var(--transition-base);
+}
+
+.vision-pillar-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card);
+}
+
+/* Section 3: Milestones Counter */
+.about-milestones-sec {
+  padding: 75px 0;
+  background: var(--color-two);
+  color: var(--white);
+}
+
+.milestone-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 32px 24px;
+  text-align: center;
+  height: 100%;
+  transition: var(--transition-base);
+}
+
+.milestone-card:hover {
+  border-color: var(--main-color);
+  background: rgba(var(--main-color-rgb), 0.14);
+  transform: translateY(-6px);
+}
+
+.milestone-num {
+  font-size: 46px;
+  font-weight: 900;
+  color: var(--main-color);
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+/* Section 4: Evolution Timeline */
+.about-timeline-sec {
+  padding: 95px 0;
+  background: var(--color-three);
+}
+
+.timeline-track {
+  position: relative;
+  padding-left: 32px;
+  border-left: 3px solid var(--main-color);
+}
+
+.timeline-node {
+  position: relative;
+  background: var(--white);
+  border-radius: 12px;
+  padding: 26px;
+  margin-bottom: 24px;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-card);
+  transition: var(--transition-base);
+}
+
+.timeline-node::before {
+  content: "";
+  position: absolute;
+  left: -42px;
+  top: 28px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--main-color);
+  border: 4px solid var(--white);
+  box-shadow: 0 0 0 2px var(--main-color);
+}
+
+.timeline-node:hover {
+  transform: translateX(8px);
+  border-color: var(--main-color);
+}
+
+.timeline-year {
+  display: inline-block;
+  background: var(--main-color);
+  color: var(--white);
+  font-weight: 800;
+  font-size: 13px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 8px;
+}
+
+/* Section 5: Showroom & Dyno Vault Facilities */
+.about-facilities-sec {
+  padding: 95px 0;
+  background: var(--white);
+}
+
+/* Section 6: Master Engineers & Team */
+.about-team-sec {
+  padding: 95px 0;
+  background: var(--color-three);
+}
+
+.team-member-card {
+  background: var(--white);
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-card);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition-base);
+}
+
+.team-member-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--main-color);
+}
+
+.team-img-wrap {
+  position: relative;
+  height: 280px;
+  overflow: hidden;
+}
+
+.team-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.team-member-card:hover .team-img-wrap img {
+  transform: scale(1.07);
+}
+
+.team-socials {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  display: flex;
+  gap: 8px;
+}
+
+.team-socials a {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--color-two);
+  color: var(--white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+
+.team-socials a:hover {
+  background: var(--main-color);
+}
+
+/* Section 7: 50-Point Factory Inspection Workflow */
+.about-inspection-sec {
+  padding: 95px 0;
+  background: var(--color-two);
+  color: var(--white);
+}
+
+.inspection-step-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 28px 24px;
+  height: 100%;
+  position: relative;
+  transition: var(--transition-base);
+}
+
+.inspection-step-card:hover {
+  border-color: var(--main-color);
+  transform: translateY(-6px);
+}
+
+.step-badge-num {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  background: var(--main-color);
+  color: var(--white);
+  font-weight: 900;
+  font-size: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+/* Section 8: Awards & Accolades */
+.about-awards-sec {
+  padding: 95px 0;
+  background: var(--white);
+}
+
+/* Section 9: Collector Stories */
+.about-collectors-sec {
+  padding: 95px 0;
+  background: var(--color-three);
+}
+
+/* Section 10: Private VIP Viewing Booking */
+.about-vip-sec {
+  padding: 95px 0;
+  background: var(--white);
+}

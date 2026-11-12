@@ -1,0 +1,202 @@
+.events-banner-bg {
+  background-image: url("../images/events/banner-bg.webp");
+}
+
+/* Section 2: Featured Flagship Event Spotlight */
+.featured-event-sec {
+  padding: 95px 0;
+  background: var(--white);
+}
+
+.featured-event-card {
+  background: var(--color-two);
+  color: var(--white);
+  border-radius: 18px;
+  overflow: hidden;
+  border: 2px solid rgba(var(--main-color-rgb), 0.45);
+  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.22);
+}
+
+.featured-event-img {
+  height: 100%;
+  min-height: 420px;
+  position: relative;
+}
+
+.featured-event-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.featured-event-body {
+  padding: 44px 38px;
+}
+
+/* Section 3: Upcoming Events Grid */
+.upcoming-events-sec {
+  padding: 95px 0;
+  background: var(--color-three);
+}
+
+.event-meta-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 13.5px;
+  color: #555555;
+  margin-bottom: 14px;
+}
+
+.event-meta-list span i {
+  color: var(--main-color);
+  margin-right: 6px;
+}
+
+/* Section 4: Event Experience Pillars */
+.event-pillars-sec {
+  padding: 95px 0;
+  background: var(--white);
+}
+
+.event-pillar-box {
+  background: var(--color-three);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  padding: 32px 24px;
+  text-align: center;
+  height: 100%;
+  transition: var(--transition-base);
+}
+
+.event-pillar-box:hover {
+  background: var(--color-two);
+  color: var(--white);
+  transform: translateY(-8px);
+  border-color: var(--main-color);
+}
+
+.event-pillar-box:hover h4 {
+  color: var(--white);
+}
+
+.event-pillar-box:hover p {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.pillar-icon-circle {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: var(--main-color);
+  color: var(--white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  margin-bottom: 18px;
+}
+
+/* Section 5: Track Day Schedule Itinerary */
+.event-schedule-sec {
+  padding: 95px 0;
+  background: var(--color-two);
+  color: var(--white);
+}
+
+.schedule-row-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-left: 4px solid var(--main-color);
+  border-radius: 12px;
+  padding: 22px 26px;
+  margin-bottom: 16px;
+  transition: var(--transition-base);
+}
+
+.schedule-row-card:hover {
+  background: rgba(var(--main-color-rgb), 0.15);
+  transform: translateX(6px);
+}
+
+.schedule-time-badge {
+  background: var(--main-color);
+  color: var(--white);
+  font-weight: 800;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  display: inline-block;
+}
+
+/* Section 6: Guest Pro Riders & Speakers */
+.event-speakers-sec {
+  padding: 95px 0;
+  background: var(--white);
+}
+
+/* Section 7: Track Day & Event Pass Packages */
+.event-passes-sec {
+  padding: 95px 0;
+  background: var(--color-three);
+}
+
+.pass-tier-card {
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 36px 28px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-card);
+  transition: var(--transition-base);
+  position: relative;
+}
+
+.pass-tier-card.featured-pass {
+  background: var(--color-two);
+  color: var(--white);
+  border: 2px solid var(--main-color);
+}
+
+.pass-tier-card.featured-pass h3,
+.pass-tier-card.featured-pass .pass-price {
+  color: var(--white);
+}
+
+.pass-tier-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+}
+
+.pass-price {
+  font-size: 42px;
+  font-weight: 900;
+  color: var(--main-color);
+  margin: 14px 0 20px;
+}
+
+.pass-features-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.15);
+  font-size: 15px;
+}
+
+/* Section 8: Past Event Highlights Gallery */
+.event-gallery-sec {
+  padding: 95px 0;
+  background: var(--white);
+}
+
+/* Section 9: Event Safety & Participation FAQ */
+.event-faq-sec {
+  padding: 95px 0;
+  background: var(--color-three);
+}
+
+/* Section 10: Event Slot Registration Form */
+.event-register-sec {
+  padding: 95px 0;
+  background: var(--white);
+}

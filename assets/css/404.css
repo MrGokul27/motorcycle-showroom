@@ -1,0 +1,619 @@
+.error-404-body {
+  background-color: #0e0e0e;
+  color: var(--white);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.error-404-section {
+  position: relative;
+  min-height: 100vh;
+  padding: 36px 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #101010;
+  background-image:
+    radial-gradient(
+      circle at 12% 18%,
+      rgba(var(--main-color-rgb), 0.22) 0%,
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 88% 82%,
+      rgba(var(--main-color-rgb), 0.15) 0%,
+      transparent 48%
+    ),
+    linear-gradient(135deg, #0b0b0b 0%, #171717 50%, #101010 100%);
+  overflow: hidden;
+}
+
+/* Carbon-fiber / racing telemetry grid overlay */
+.error-404-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 38px 38px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ambient racing apex glow line */
+.error-404-section::after {
+  content: "";
+  position: absolute;
+  top: -120px;
+  right: -120px;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(var(--main-color-rgb), 0.24) 0%,
+    transparent 70%
+  );
+  filter: blur(45px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.error-404-section .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* ==========================================================================
+   1. Top Telemetry Header Bar (Logo + Status + Quick Actions)
+   ========================================================================== */
+.error-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding: 14px 24px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+}
+
+.error-brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+
+.error-brand-logo img {
+  max-height: 44px;
+  width: auto;
+  transition: transform 0.3s ease;
+}
+
+.error-brand-logo:hover img {
+  transform: scale(1.04);
+}
+
+.error-brand-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.error-brand-tag {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.error-telemetry-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(227, 20, 35, 0.12);
+  border: 1px solid rgba(227, 20, 35, 0.35);
+  padding: 8px 18px;
+  border-radius: 50px;
+}
+
+.error-telemetry-pill .pulse-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: var(--main-color);
+  box-shadow: 0 0 0 0 rgba(var(--main-color-rgb), 0.7);
+  animation: errorPulse 1.8s infinite;
+}
+
+@keyframes errorPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(var(--main-color-rgb), 0.75);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(var(--main-color-rgb), 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(var(--main-color-rgb), 0);
+  }
+}
+
+/* ==========================================================================
+   2. Main 404 Split Showroom Vault Card
+   ========================================================================== */
+.error-vault-card {
+  background: linear-gradient(145deg, #1b1b1b 0%, #222222 100%);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 5px solid var(--main-color);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.65);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Left Column: Visual Superbike & Tachometer 404 Stage */
+.error-visual-stage {
+  position: relative;
+  height: 100%;
+  min-height: 580px;
+  padding: 44px 38px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-image: url("../images/home/hero-slide-1.webp");
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.error-visual-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(12, 12, 12, 0.9) 0%,
+    rgba(25, 25, 25, 0.78) 48%,
+    rgba(227, 20, 35, 0.36) 100%
+  );
+  z-index: 1;
+}
+
+.error-visual-stage::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(12, 12, 12, 0.96) 100%
+  );
+  z-index: 1;
+}
+
+.error-stage-top,
+.error-stage-center,
+.error-stage-bottom {
+  position: relative;
+  z-index: 2;
+}
+
+.error-stage-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ecu-code-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 6px 14px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--white);
+  backdrop-filter: blur(8px);
+}
+
+.ecu-code-tag i {
+  color: var(--main-color);
+}
+
+/* Centerpiece 404 Tachometer Ring */
+.error-tachometer-wrap {
+  text-align: center;
+  margin: 28px auto;
+  position: relative;
+  max-width: 340px;
+}
+
+.tachometer-ring {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(18, 18, 18, 0.92) 0%,
+    rgba(30, 30, 30, 0.78) 70%,
+    rgba(227, 20, 35, 0.18) 100%
+  );
+  border: 2px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.6),
+    inset 0 0 35px rgba(var(--main-color-rgb), 0.24);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.tachometer-svg {
+  position: absolute;
+  inset: -8px;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  transform: rotate(-135deg);
+  pointer-events: none;
+}
+
+.tacho-track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 6;
+  stroke-dasharray: 560;
+  stroke-dashoffset: 140;
+  stroke-linecap: round;
+}
+
+.tacho-redline {
+  fill: none;
+  stroke: var(--main-color);
+  stroke-width: 6;
+  stroke-dasharray: 560;
+  stroke-dashoffset: 210;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 8px rgba(var(--main-color-rgb), 0.8));
+  animation: revNeedle 3.2s ease-in-out infinite alternate;
+}
+
+@keyframes revNeedle {
+  0% {
+    stroke-dashoffset: 245;
+  }
+  100% {
+    stroke-dashoffset: 175;
+  }
+}
+
+.error-code-giant {
+  font-size: clamp(64px, 7vw, 86px);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -2px;
+  color: var(--white);
+  text-shadow: 0 6px 28px rgba(var(--main-color-rgb), 0.55);
+  margin-bottom: 6px;
+}
+
+.error-code-giant span {
+  color: var(--main-color);
+}
+
+.tacho-rpm-label {
+  font-size: 11.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.78);
+  background: rgba(227, 20, 35, 0.22);
+  border: 1px solid rgba(227, 20, 35, 0.45);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+/* Telemetry HUD Grid inside Visual Stage */
+.error-hud-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.error-hud-box {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-left: 3px solid var(--main-color);
+  border-radius: 12px;
+  padding: 12px 14px;
+  backdrop-filter: blur(8px);
+}
+
+.error-hud-box .hud-label {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 3px;
+}
+
+.error-hud-box .hud-val {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--white);
+}
+
+/* ==========================================================================
+   3. Right Column: Command & Navigation Panel
+   ========================================================================== */
+.error-command-panel {
+  padding: 48px 46px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(180deg, #1f1f1f 0%, #181818 100%);
+}
+
+.error-panel-logo-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 22px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.error-panel-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.error-panel-logo img {
+  max-height: 40px;
+  width: auto;
+}
+
+.error-kicker-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--main-color);
+  background: rgba(var(--main-color-rgb), 0.12);
+  border: 1px solid rgba(var(--main-color-rgb), 0.3);
+  padding: 6px 14px;
+  border-radius: 30px;
+}
+
+.error-main-heading {
+  font-size: clamp(28px, 3.4vw, 42px);
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+.error-description {
+  font-size: 15.5px;
+  color: rgba(255, 255, 255, 0.76);
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+/* Primary Action Buttons (Home Redirection + Go Back Button) */
+.error-action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.error-action-buttons .theme-btn {
+  min-width: 215px;
+  padding: 15px 28px;
+}
+
+.btn-go-back {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--white) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+}
+
+.btn-go-back:hover {
+  background: var(--white);
+  color: var(--color-two) !important;
+  border-color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(255, 255, 255, 0.18);
+}
+
+/* Quick-Shift Showroom Destinations Grid */
+.error-quick-links-box {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+  padding: 20px 22px;
+  margin-bottom: 24px;
+}
+
+.error-quick-title {
+  font-size: 12.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.3px;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.error-quick-title i {
+  color: var(--main-color);
+}
+
+.error-quick-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.error-quick-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 13px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 13.5px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: var(--transition-base);
+}
+
+.error-quick-item i {
+  color: var(--main-color);
+  font-size: 14px;
+  transition: transform 0.25s ease;
+}
+
+.error-quick-item:hover {
+  background: rgba(var(--main-color-rgb), 0.16);
+  border-color: rgba(var(--main-color-rgb), 0.5);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+.error-quick-item:hover i {
+  transform: translateX(3px);
+}
+
+/* Bottom Concierge Assistance Bar */
+.error-concierge-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.error-concierge-bar strong {
+  color: var(--white);
+}
+
+.error-concierge-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--main-color);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.error-concierge-link:hover {
+  color: var(--white);
+}
+
+/* ==========================================================================
+   4. Responsive Breakpoints
+   ========================================================================== */
+@media (max-width: 991.98px) {
+  .error-visual-stage {
+    min-height: 430px;
+    padding: 34px 28px;
+  }
+
+  .error-command-panel {
+    padding: 36px 30px;
+  }
+
+  .error-quick-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 575.98px) {
+  .error-404-section {
+    padding: 20px 0 36px;
+  }
+
+  .error-top-bar {
+    padding: 12px 16px;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .error-brand-divider,
+  .error-brand-tag {
+    display: none;
+  }
+
+  .error-visual-stage {
+    min-height: 380px;
+    padding: 28px 20px;
+  }
+
+  .tachometer-ring {
+    width: 210px;
+    height: 210px;
+  }
+
+  .error-hud-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .error-command-panel {
+    padding: 28px 20px;
+  }
+
+  .error-action-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .error-action-buttons .theme-btn {
+    width: 100%;
+  }
+
+  .error-quick-grid {
+    grid-template-columns: 1fr;
+  }
+}

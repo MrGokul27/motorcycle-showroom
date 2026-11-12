@@ -1,0 +1,162 @@
+.contact-banner-bg {
+  background-image: url("../images/contact/banner-bg.webp");
+}
+
+/* Section 2: Direct Showroom Contact Channels */
+.contact-channels-sec {
+  padding: 95px 0 60px;
+  background: var(--white);
+}
+
+.contact-channel-card {
+  background: var(--color-three);
+  border: 1px solid var(--border-light);
+  border-bottom: 4px solid var(--main-color);
+  border-radius: 16px;
+  padding: 36px 28px;
+  text-align: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: var(--transition-base);
+}
+
+.contact-channel-card:hover {
+  background: var(--color-two);
+  color: var(--white);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+}
+
+.contact-channel-card:hover h4,
+.contact-channel-card:hover a,
+.contact-channel-card:hover p {
+  color: var(--white) !important;
+}
+
+.channel-icon-box {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--main-color);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 24px rgba(var(--main-color-rgb), 0.3);
+}
+
+/* Section 3: Main Showroom Inquiry Form & London Map */
+.contact-main-form-sec {
+  padding: 45px 0 95px;
+  background: var(--white);
+}
+
+.map-frame-wrapper {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 2px solid var(--border-light);
+  box-shadow: var(--shadow-card);
+  height: 100%;
+  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+}
+
+.map-frame-wrapper iframe {
+  width: 100%;
+  flex-grow: 1;
+  min-height: 380px;
+  border: 0;
+}
+
+.map-info-footer {
+  background: var(--color-two);
+  color: var(--white);
+  padding: 22px 26px;
+  border-top: 4px solid var(--main-color);
+}
+
+/* Section 4: Direct Department Directory */
+.contact-departments-sec {
+  padding: 95px 0;
+  background: var(--color-three);
+}
+
+.dept-card {
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-left: 4px solid var(--main-color);
+  border-radius: 12px;
+  padding: 26px 24px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-card);
+  transition: var(--transition-base);
+}
+
+.dept-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Section 5: UK Showroom & Delivery Hubs */
+.contact-hubs-sec {
+  padding: 95px 0;
+  background: var(--white);
+}
+
+/* Section 6: VIP Visit Experience Steps */
+.contact-visit-steps-sec {
+  padding: 95px 0;
+  background: var(--color-two);
+  color: var(--white);
+}
+
+/* Section 7: Part-Exchange & Trade-In Valuation */
+.contact-tradein-sec {
+  padding: 95px 0;
+  background: var(--color-three);
+}
+
+/* Section 8: Showroom Opening Hours & Schedule */
+.contact-hours-sec {
+  padding: 95px 0;
+  background: var(--white);
+}
+
+.hours-table-card {
+  background: var(--color-two);
+  color: var(--white);
+  border-radius: 16px;
+  padding: 36px;
+  border-top: 5px solid var(--main-color);
+}
+
+.hours-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.hours-row:last-child {
+  border-bottom: none;
+}
+
+/* Section 9: Contact & Purchasing FAQ */
+.contact-faq-sec {
+  padding: 95px 0;
+  background: var(--color-three);
+}
+
+/* Section 10: Instant Roadside & Concierge Support Banner */
+.contact-emergency-sec {
+  padding: 80px 0;
+  background: linear-gradient(135deg, var(--main-color) 0%, #9e0b16 100%);
+  color: var(--white);
+}
