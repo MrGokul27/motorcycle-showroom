@@ -209,11 +209,9 @@
         e.preventDefault();
         const input = document.getElementById("headerSearchInput");
         if (input && input.value.trim()) {
-          showToast(
-            'Searching showroom inventory for "' + input.value.trim() + '"...',
-          );
           searchPopup.classList.remove("open");
           input.value = "";
+          window.location.href = get404RedirectUrl();
         }
       });
     }
@@ -390,8 +388,10 @@
       input.addEventListener("blur", enforceFutureOrToday);
     });
 
-    // 4. Form Submissions
-    const forms = document.querySelectorAll("form.stackly-validated-form");
+    // 4. Form Submissions (All forms except Login & Register redirect to 404 page)
+    const forms = document.querySelectorAll(
+      "form:not(#loginAuthForm):not(#registerAuthForm):not(.auth-form)",
+    );
     forms.forEach(function (form) {
       // Ensure every input/select/textarea inside is required
       form
@@ -428,19 +428,11 @@
           return;
         }
 
-        const userField = form.querySelector(
-          'input[name="username"], input[name="name"], .username-field',
-        );
-        const userName = userField ? userField.value.trim() : "Rider";
-        showToast(
-          "Thank you, " +
-            userName +
-            "! Your Stackly Showroom request has been confirmed.",
-        );
         form.reset();
         if (dateField) {
           dateField.value = todayStr;
         }
+        window.location.href = get404RedirectUrl();
       });
     });
   }
