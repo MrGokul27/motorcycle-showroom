@@ -32,7 +32,121 @@
     <!-- Main Theme Stylesheet -->
     <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
-  <body>
+  <body class="preloader-active">
+    <!-- ==================================================================
+         SUPERBIKE TELEMETRY & TACHOMETER PRELOADER (2-Second Ignition Sequence)
+         ================================================================== -->
+    <div
+      class="stackly-preloader"
+      id="stacklyPreloader"
+      role="status"
+      aria-live="polite"
+      aria-label="Loading Stackly Motorcycle Showroom"
+    >
+      <div class="preloader-shutter preloader-shutter-top"></div>
+      <div class="preloader-shutter preloader-shutter-bottom"></div>
+      <div class="preloader-ambient-glow"></div>
+
+      <div class="preloader-cockpit">
+        <!-- F1 / Superbike Shift-Light LED Array -->
+        <div class="preloader-shift-lights" aria-hidden="true">
+          <span class="shift-led led-green"></span>
+          <span class="shift-led led-green"></span>
+          <span class="shift-led led-green"></span>
+          <span class="shift-led led-amber"></span>
+          <span class="shift-led led-amber"></span>
+          <span class="shift-led led-red"></span>
+          <span class="shift-led led-red"></span>
+          <span class="shift-led led-red"></span>
+        </div>
+
+        <!-- Circular Tachometer & Brake Rotor Core -->
+        <div class="preloader-tachometer">
+          <div class="tacho-outer-rotor" aria-hidden="true"></div>
+          <svg class="tacho-svg" viewBox="0 0 240 240" aria-hidden="true">
+            <defs>
+              <linearGradient
+                id="tachoRedlineGrad"
+                x1="0%"
+                y1="100%"
+                x2="100%"
+                y2="0%"
+              >
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35" />
+                <stop offset="55%" stop-color="#ff4d58" />
+                <stop offset="100%" stop-color="#e31423" />
+              </linearGradient>
+              <filter
+                id="tachoGlow"
+                x="-20%"
+                y="-20%"
+                width="140%"
+                height="140%"
+              >
+                <feGaussianBlur stdDeviation="4" result="blur" />
+                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+              </filter>
+            </defs>
+
+            <!-- Outer Segmented Dash Track -->
+            <circle class="tacho-track-ticks" cx="120" cy="120" r="104" />
+            <!-- Background Gauge Arc -->
+            <circle class="tacho-track-bg" cx="120" cy="120" r="92" />
+            <!-- Animated RPM Sweep Arc -->
+            <circle
+              class="tacho-track-fill"
+              id="preloaderTachoArc"
+              cx="120"
+              cy="120"
+              r="92"
+            />
+          </svg>
+
+          <!-- Center Cockpit Readout -->
+          <div class="tacho-center-hub">
+            <div class="tacho-gear-box">
+              <span class="tacho-gear-label">GEAR</span>
+              <span class="tacho-gear-value" id="preloaderGearVal">N</span>
+            </div>
+            <div class="tacho-bike-emblem" aria-hidden="true">
+              <i class="fa-solid fa-motorcycle"></i>
+            </div>
+            <div class="tacho-rpm-readout">
+              <span class="tacho-rpm-number" id="preloaderRpmVal">0</span>
+              <span class="tacho-rpm-unit">RPM &times;1000</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Brand Identity & Telemetry Progress Bar -->
+        <div class="preloader-brand-panel">
+          <div class="preloader-brand-header">
+            <img
+              src="assets/images/logoStackly.webp"
+              alt="Stackly Motorcycle Showroom"
+              class="preloader-logo"
+            />
+            <span class="preloader-badge">V4 CORSA TELEMETRY</span>
+          </div>
+
+          <div class="preloader-progress-track">
+            <div
+              class="preloader-progress-fill"
+              id="preloaderProgressBar"
+            ></div>
+          </div>
+
+          <div class="preloader-telemetry-meta">
+            <span class="preloader-status-text" id="preloaderStatusText">
+              <i class="fa-solid fa-microchip text-main me-1"></i>
+              IGNITION SEQUENCE &bull; ECU CALIBRATING
+            </span>
+            <span class="preloader-percent" id="preloaderPercentVal">0%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="page-wrapper">
       <!-- Common Header Component -->
       <div id="header-component"></div>

@@ -1636,6 +1636,100 @@
     });
   }
 
+  /* ==========================================================================
+     Home Page Superbike Telemetry & Tachometer Preloader (~2 Seconds)
+     ========================================================================== */
+  function initHomePreloader() {
+    const preloader = document.getElementById("stacklyPreloader");
+    if (!preloader) return;
+
+    const tachoArc = document.getElementById("preloaderTachoArc");
+    const rpmVal = document.getElementById("preloaderRpmVal");
+    const gearVal = document.getElementById("preloaderGearVal");
+    const progressBar = document.getElementById("preloaderProgressBar");
+    const percentVal = document.getElementById("preloaderPercentVal");
+    const statusText = document.getElementById("preloaderStatusText");
+    const shiftLeds = preloader.querySelectorAll(".shift-led");
+
+    const TOTAL_DURATION_MS = 2000; // 2-second ignition sequence
+    const MAX_ARC_LENGTH = 433.5;
+    const MAX_RPM = 14.5; // 14,500 RPM V4 Redline
+    const gears = ["N", "1", "2", "3", "4", "5", "6"];
+    const startTime = performance.now();
+
+    function easeOutCubic(t) {
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    function updateTelemetryFrame(now) {
+      const elapsed = now - startTime;
+      const rawProgress = Math.min(1, Math.max(0, elapsed / TOTAL_DURATION_MS));
+      const eased = easeOutCubic(rawProgress);
+
+      const percent = Math.round(eased * 100);
+      const currentRpm = (eased * MAX_RPM).toFixed(1);
+      const dashOffset = MAX_ARC_LENGTH * (1 - eased);
+
+      if (tachoArc) {
+        tachoArc.style.strokeDashoffset = String(dashOffset.toFixed(2));
+      }
+      if (rpmVal) {
+        rpmVal.textContent = currentRpm;
+      }
+      if (progressBar) {
+        progressBar.style.width = percent + "%";
+      }
+      if (percentVal) {
+        percentVal.textContent = percent + "%";
+      }
+      if (gearVal) {
+        const gearIdx = Math.min(
+          gears.length - 1,
+          Math.floor(eased * gears.length),
+        );
+        gearVal.textContent = gears[gearIdx];
+      }
+
+      if (shiftLeds.length) {
+        const activeCount = Math.round(eased * shiftLeds.length);
+        shiftLeds.forEach(function (led, idx) {
+          led.classList.toggle("active", idx < activeCount);
+        });
+      }
+
+      if (statusText) {
+        if (percent < 38) {
+          statusText.innerHTML =
+            '<i class="fa-solid fa-microchip text-main me-1"></i> IGNITION SEQUENCE &bull; ECU CALIBRATING';
+        } else if (percent < 78) {
+          statusText.innerHTML =
+            '<i class="fa-solid fa-gauge-high text-main me-1"></i> PRESSURIZING V4 DESMO TELEMETRY';
+        } else {
+          statusText.innerHTML =
+            '<i class="fa-solid fa-flag-checkered text-main me-1"></i> DYNOJET 250i READY &bull; LAUNCH ACTIVE';
+        }
+      }
+
+      if (rawProgress < 1) {
+        requestAnimationFrame(updateTelemetryFrame);
+      } else {
+        setTimeout(function () {
+          preloader.classList.add("preloader-loaded");
+          document.body.classList.remove("preloader-active");
+          setTimeout(function () {
+            if (preloader.parentNode) {
+              preloader.style.display = "none";
+            }
+          }, 700);
+        }, 120);
+      }
+    }
+
+    requestAnimationFrame(updateTelemetryFrame);
+  }
+
+  initHomePreloader();
+
   document.addEventListener("DOMContentLoaded", async function () {
     await Promise.all([
       loadComponent(

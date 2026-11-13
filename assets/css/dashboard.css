@@ -39,7 +39,6 @@
    ========================================================================== */
 .dashboard-layout {
   position: relative;
-  z-index: 1;
   display: flex;
   min-height: 100vh;
   width: 100%;
@@ -61,10 +60,12 @@
   left: 0;
   bottom: 0;
   height: 100vh;
+  height: 100dvh;
   max-height: 100vh;
+  max-height: 100dvh;
   overflow-y: auto;
   overflow-x: hidden;
-  z-index: 1040;
+  z-index: 1050;
   transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
   box-shadow: 10px 0 36px rgba(0, 0, 0, 0.5);
   scrollbar-width: thin;
@@ -306,21 +307,26 @@
   inset: 0;
   background: rgba(0, 0, 0, 0.72);
   backdrop-filter: blur(4px);
-  z-index: 1035;
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 1040;
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
   transition: all 0.3s ease;
 }
 
 .sidebar-backdrop.show {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
 }
 
 /* ==========================================================================
    3. Main Content Wrapper & Top Header Bar
    ========================================================================== */
 .dashboard-main {
+  position: relative;
+  z-index: 1;
   flex: 1;
   margin-left: 295px;
   min-width: 0;

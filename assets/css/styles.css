@@ -2211,3 +2211,427 @@ ul {
     transition: none !important;
   }
 }
+
+/* ==========================================================================
+   9. Home Page Superbike Telemetry & Tachometer Preloader (~2s Ignition UI)
+   ========================================================================== */
+body.preloader-active {
+  overflow: hidden;
+}
+
+.stackly-preloader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  pointer-events: auto;
+  transition: visibility 0.65s ease 0.55s;
+}
+
+/* Split Carbon-Fiber Paddock Shutters */
+.preloader-shutter {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50.5%;
+  background-color: #0e0e0e;
+  background-image:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(var(--main-color-rgb), 0.14) 0%,
+      transparent 65%
+    ),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.018) 0px,
+      rgba(255, 255, 255, 0.018) 2px,
+      transparent 2px,
+      transparent 8px
+    );
+  z-index: 1;
+  transition: transform 0.65s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.preloader-shutter-top {
+  top: 0;
+  border-bottom: 1px solid rgba(var(--main-color-rgb), 0.35);
+}
+
+.preloader-shutter-bottom {
+  bottom: 0;
+  border-top: 1px solid rgba(var(--main-color-rgb), 0.35);
+}
+
+.preloader-ambient-glow {
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(var(--main-color-rgb), 0.24) 0%,
+    rgba(var(--main-color-rgb), 0.05) 48%,
+    transparent 70%
+  );
+  filter: blur(28px);
+  z-index: 2;
+  pointer-events: none;
+  animation: preloaderPulseGlow 1.6s ease-in-out infinite alternate;
+  transition: opacity 0.4s ease;
+}
+
+@keyframes preloaderPulseGlow {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+/* Central Cockpit Cluster */
+.preloader-cockpit {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(92vw, 410px);
+  padding: 28px 26px 24px;
+  border-radius: 24px;
+  background: linear-gradient(
+    160deg,
+    rgba(28, 28, 28, 0.92) 0%,
+    rgba(16, 16, 16, 0.96) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-top: 3px solid var(--main-color);
+  box-shadow:
+    0 28px 70px rgba(0, 0, 0, 0.85),
+    0 0 40px rgba(var(--main-color-rgb), 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition:
+    opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Shift-Light LED Array */
+.preloader-shift-lights {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  padding: 6px 16px;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.shift-led {
+  width: 16px;
+  height: 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.12);
+  transition:
+    background-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+}
+
+.shift-led.active.led-green {
+  background: #22c55e;
+  box-shadow: 0 0 10px #22c55e;
+}
+
+.shift-led.active.led-amber {
+  background: #f59e0b;
+  box-shadow: 0 0 10px #f59e0b;
+}
+
+.shift-led.active.led-red {
+  background: var(--main-color);
+  box-shadow: 0 0 14px var(--main-color);
+  transform: scaleY(1.2);
+}
+
+/* Circular Tachometer & Brake Rotor */
+.preloader-tachometer {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tacho-outer-rotor {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(255, 255, 255, 0.14);
+  animation: tachoRotorSpin 8s linear infinite;
+}
+
+.tacho-outer-rotor::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  border: 1px solid rgba(var(--main-color-rgb), 0.22);
+  border-top-color: var(--main-color);
+  border-bottom-color: transparent;
+}
+
+@keyframes tachoRotorSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.tacho-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(135deg);
+  overflow: visible;
+}
+
+.tacho-track-ticks {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.16);
+  stroke-width: 4;
+  stroke-dasharray: 3 9.6;
+}
+
+.tacho-track-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 433.5 578;
+}
+
+.tacho-track-fill {
+  fill: none;
+  stroke: url(#tachoRedlineGrad);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 433.5 578;
+  stroke-dashoffset: 433.5;
+  filter: url(#tachoGlow);
+  transition: stroke-dashoffset 0.06s linear;
+}
+
+/* Center Digital Readout */
+.tacho-center-hub {
+  position: absolute;
+  inset: 28px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 35%,
+    rgba(38, 38, 38, 0.95) 0%,
+    rgba(14, 14, 14, 0.98) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 6px 20px rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  text-align: center;
+}
+
+.tacho-gear-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 10px;
+  border-radius: 20px;
+  background: rgba(var(--main-color-rgb), 0.16);
+  border: 1px solid rgba(var(--main-color-rgb), 0.45);
+  margin-bottom: 6px;
+}
+
+.tacho-gear-label {
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.tacho-gear-value {
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--main-color);
+  min-width: 12px;
+}
+
+.tacho-bike-emblem {
+  font-size: 28px;
+  color: var(--white);
+  line-height: 1;
+  margin: 2px 0 4px;
+  text-shadow: 0 0 18px rgba(var(--main-color-rgb), 0.75);
+  animation: bikeThrottleVibe 0.25s ease-in-out infinite alternate;
+}
+
+@keyframes bikeThrottleVibe {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    transform: translateY(-1.5px) scale(1.03);
+  }
+}
+
+.tacho-rpm-readout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.05;
+}
+
+.tacho-rpm-number {
+  font-size: 29px;
+  font-weight: 900;
+  color: var(--white);
+  letter-spacing: -0.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+.tacho-rpm-unit {
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+  color: rgba(255, 255, 255, 0.52);
+  margin-top: 3px;
+}
+
+/* Brand Identity & Progress Bar Panel */
+.preloader-brand-panel {
+  width: 100%;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.preloader-brand-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.preloader-logo {
+  max-height: 30px;
+  width: auto;
+}
+
+.preloader-badge {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-left: 2.5px solid var(--main-color);
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.preloader-progress-track {
+  width: 100%;
+  height: 7px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.preloader-progress-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #ff5864 0%, var(--main-color) 100%);
+  box-shadow: 0 0 16px rgba(var(--main-color-rgb), 0.8);
+  transition: width 0.06s linear;
+}
+
+.preloader-telemetry-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.preloader-status-text {
+  color: rgba(255, 255, 255, 0.74);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.preloader-percent {
+  color: var(--main-color);
+  font-weight: 900;
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+/* Exit / Completed State (Triggered at ~2 Seconds) */
+.stackly-preloader.preloader-loaded {
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.stackly-preloader.preloader-loaded .preloader-cockpit {
+  opacity: 0;
+  transform: scale(0.9) translateY(-12px);
+}
+
+.stackly-preloader.preloader-loaded .preloader-ambient-glow {
+  opacity: 0;
+}
+
+.stackly-preloader.preloader-loaded .preloader-shutter-top {
+  transform: translateY(-102%);
+}
+
+.stackly-preloader.preloader-loaded .preloader-shutter-bottom {
+  transform: translateY(102%);
+}
+
+@media (max-width: 575.98px) {
+  .preloader-cockpit {
+    padding: 22px 18px 20px;
+  }
+  .preloader-tachometer {
+    width: 195px;
+    height: 195px;
+  }
+  .tacho-rpm-number {
+    font-size: 25px;
+  }
+}
