@@ -55,63 +55,37 @@
         id="dashboardSidebar"
         aria-label="Role-Based Showroom Sidebar"
       >
-        <div>
-          <!-- Brand Logo & Mobile Close -->
-          <div class="sidebar-brand-box">
-            <a
-              href="../index.html"
-              class="sidebar-brand-link"
-              aria-label="Stackly Motorcycle Showroom Home"
-            >
-              <img
-                src="../assets/images/logoStackly.webp"
-                alt="Stackly Motorcycle Showroom Logo"
-              />
-            </a>
-            <button
-              type="button"
-              class="sidebar-close-btn"
-              id="dashSidebarCloseBtn"
-              data-sidebar-toggle="close"
-              aria-label="Close Sidebar Menu"
-            >
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-          </div>
+        <!-- Brand Logo & Mobile Close -->
+        <div class="sidebar-brand-box">
+          <a
+            href="../index.html"
+            class="sidebar-brand-link"
+            aria-label="Stackly Motorcycle Showroom Home"
+          >
+            <img
+              src="../assets/images/logoStackly.webp"
+              alt="Stackly Motorcycle Showroom Logo"
+            />
+          </a>
+          <button
+            type="button"
+            class="sidebar-close-btn"
+            id="dashSidebarCloseBtn"
+            data-sidebar-toggle="close"
+            aria-label="Close Sidebar Menu"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
 
-          <!-- Logged-In Role & User Identity Box -->
-          <div class="sidebar-role-card">
-            <span class="sidebar-role-badge" id="sidebarRoleBadge">
-              <i class="fa-solid fa-id-badge"></i>
-              <span id="sidebarRoleText">Rider / Buyer</span>
-            </span>
-            <h2 class="sidebar-user-name" id="sidebarUserName">
-              Oliver Sterling
-            </h2>
-            <p class="sidebar-user-email" id="sidebarUserEmail">
-              rider@stacklymotors.co.uk
-            </p>
-            <div class="sidebar-session-meta">
-              <span class="pulse-dot"></span>
-              <span id="sidebarRememberStatus"
-                >Trusted Session &bull; Encrypted</span
-              >
-            </div>
+        <!-- Dynamic Role-Specific Sidebar Menu (Scrollable) -->
+        <div class="sidebar-menu-wrap">
+          <div class="sidebar-menu-label" id="sidebarMenuHeading">
+            Role Paddock Navigation
           </div>
-
-          <!-- Dynamic Role-Specific Sidebar Menu -->
-          <div class="sidebar-menu-wrap">
-            <div class="sidebar-menu-label" id="sidebarMenuHeading">
-              Role Paddock Navigation
-            </div>
-            <ul
-              class="dash-sidebar-nav"
-              id="dashboardSidebarNav"
-              role="tablist"
-            >
-              <!-- Populated dynamically based on Login Role in dashboard.js -->
-            </ul>
-          </div>
+          <ul class="dash-sidebar-nav" id="dashboardSidebarNav" role="tablist">
+            <!-- Populated dynamically based on Login Role in dashboard.js -->
+          </ul>
         </div>
 
         <!-- Sidebar Footer & Logout Button (Excluded from 404 redirect per Requirement 7) -->
@@ -153,10 +127,7 @@
                 Stackly <span class="text-main">Rider Paddock</span> Command
               </h1>
               <p class="topbar-subtitle">
-                <span id="topbarRoleSubtitle"
-                  >Authenticated Role: Rider / Motorcycle Buyer</span
-                >
-                <span>&bull;</span>
+                <span>Active Telemetry View:</span>
                 <span class="text-main fw-bold" id="topbarActiveSectionName"
                   >Overview</span
                 >
@@ -165,15 +136,29 @@
           </div>
 
           <div class="topbar-right">
-            <a
-              href="login.html"
-              class="dash-logout-btn topbar-logout-pill"
-              id="topLogoutBtn"
-              data-logout-btn="true"
+            <!-- Authenticated User Identity (Username, Email & Role in Top-Right Header Only) -->
+            <div
+              class="topbar-user-profile"
+              aria-label="Logged-In User Profile"
             >
-              <i class="fa-solid fa-power-off"></i>
-              <span>Logout</span>
-            </a>
+              <div class="topbar-user-avatar" aria-hidden="true">
+                <i class="fa-solid fa-user-astronaut"></i>
+              </div>
+              <div class="topbar-user-details">
+                <div class="topbar-user-top">
+                  <span class="topbar-user-name" id="topbarUserName"
+                    >Oliver Sterling</span
+                  >
+                  <span class="topbar-role-badge" id="topbarRoleBadge">
+                    <i class="fa-solid fa-id-badge"></i>
+                    <span id="topbarRoleText">Rider / Buyer</span>
+                  </span>
+                </div>
+                <span class="topbar-user-email" id="topbarUserEmail"
+                  >rider@stacklymotors.co.uk</span
+                >
+              </div>
+            </div>
           </div>
         </header>
 

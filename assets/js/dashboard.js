@@ -3984,58 +3984,24 @@
     const session = getSessionLoginData();
     const roleConfig = session.roleConfig;
 
-    // 1. Populate Sidebar & Topbar Identity + Submitted Login Data Card
-    const sidebarRoleText = document.getElementById("sidebarRoleText");
-    const sidebarUserName = document.getElementById("sidebarUserName");
-    const sidebarUserEmail = document.getElementById("sidebarUserEmail");
-    const sidebarRememberStatus = document.getElementById(
-      "sidebarRememberStatus",
-    );
+    // 1. Populate Topbar Identity (Top-Right Header Only) & Sidebar Heading
     const sidebarMenuHeading = document.getElementById("sidebarMenuHeading");
 
     const topbarPortalTitle = document.getElementById("topbarPortalTitle");
-    const topbarRoleSubtitle = document.getElementById("topbarRoleSubtitle");
     const topbarActiveSectionName = document.getElementById(
       "topbarActiveSectionName",
     );
+    const topbarUserName = document.getElementById("topbarUserName");
+    const topbarUserEmail = document.getElementById("topbarUserEmail");
+    const topbarRoleText = document.getElementById("topbarRoleText");
 
-    const sessionRoleDisplay = document.getElementById("sessionRoleDisplay");
-    const sessionEmailDisplay = document.getElementById("sessionEmailDisplay");
-    const sessionPasswordDisplay = document.getElementById(
-      "sessionPasswordDisplay",
-    );
-    const sessionRememberDisplay = document.getElementById(
-      "sessionRememberDisplay",
-    );
-
-    if (sidebarRoleText) sidebarRoleText.textContent = session.roleKey;
-    if (sidebarUserName) sidebarUserName.textContent = session.username;
-    if (sidebarUserEmail) sidebarUserEmail.textContent = session.email;
-    if (sidebarRememberStatus)
-      sidebarRememberStatus.textContent = session.rememberText;
     if (sidebarMenuHeading)
       sidebarMenuHeading.textContent = roleConfig.menuHeading;
 
     if (topbarPortalTitle) topbarPortalTitle.innerHTML = roleConfig.portalTitle;
-    if (topbarRoleSubtitle) {
-      topbarRoleSubtitle.textContent =
-        "Authenticated Role: " + session.roleLabel + " (" + session.email + ")";
-    }
-
-    if (sessionRoleDisplay) {
-      sessionRoleDisplay.textContent =
-        session.roleLabel + " [" + session.roleKey + "]";
-    }
-    if (sessionEmailDisplay) {
-      sessionEmailDisplay.textContent =
-        session.email + " (" + session.username + ")";
-    }
-    if (sessionPasswordDisplay) {
-      sessionPasswordDisplay.textContent = session.maskedPassword;
-    }
-    if (sessionRememberDisplay) {
-      sessionRememberDisplay.textContent = session.rememberText;
-    }
+    if (topbarUserName) topbarUserName.textContent = session.username;
+    if (topbarUserEmail) topbarUserEmail.textContent = session.email;
+    if (topbarRoleText) topbarRoleText.textContent = session.roleKey;
 
     // 2. Render Role-Specific Sidebar Menu Items (Requirement 2 & 5)
     const sidebarNav = document.getElementById("dashboardSidebarNav");
