@@ -285,20 +285,24 @@
 
       input.addEventListener("keydown", function (e) {
         if (e.ctrlKey || e.metaKey || e.altKey) return;
+        if (e.key === " " || e.code === "Space") {
+          e.preventDefault();
+          return;
+        }
         if (allowedControlKeys.indexOf(e.key) !== -1) return;
-        if (!/^[a-zA-Z\s]$/.test(e.key)) {
+        if (!/^[a-zA-Z]$/.test(e.key)) {
           e.preventDefault();
         }
       });
 
       input.addEventListener("beforeinput", function (e) {
-        if (e.data && /[^a-zA-Z\s]/.test(e.data)) {
+        if (e.data && /[^a-zA-Z]/.test(e.data)) {
           e.preventDefault();
         }
       });
 
       input.addEventListener("input", function () {
-        const cleaned = this.value.replace(/[^a-zA-Z\s]/g, "").slice(0, 16);
+        const cleaned = this.value.replace(/[^a-zA-Z]/g, "").slice(0, 16);
         if (this.value !== cleaned) {
           this.value = cleaned;
         }
@@ -309,7 +313,7 @@
         e.preventDefault();
         const pasted =
           (e.clipboardData || window.clipboardData).getData("text") || "";
-        const cleaned = pasted.replace(/[^a-zA-Z\s]/g, "");
+        const cleaned = pasted.replace(/[^a-zA-Z]/g, "");
         const current = this.value;
         this.value = (current + cleaned).slice(0, 16);
       });
